@@ -1,5 +1,5 @@
 class Table < ApplicationRecord
-  has_many :lists
+  has_many :lists, dependent: :destroy
 
   validates :title, presence: true,
                     length: { minimum: 5,

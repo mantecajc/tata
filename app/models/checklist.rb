@@ -1,6 +1,6 @@
 class Checklist < ApplicationRecord
   belongs_to :list
-  has_many :checklist_tasks
+  has_many :checklist_tasks, dependent: :destroy
 
   validates :completed_rate,
             numericality: { only_integer: true,
