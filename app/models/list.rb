@@ -3,5 +3,7 @@ class List < ApplicationRecord
   has_many :tasks
   has_many :checklists
 
-  validates :title, presence: true
+  validates :title, presence: true,
+                    length: { minimum: 5,
+                              maximum: 20 }
 end
