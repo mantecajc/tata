@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_133902) do
+ActiveRecord::Schema.define(version: 2021_04_10_134822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "checklist_tasks", force: :cascade do |t|
     t.string "title"
-    t.boolean "done"
+    t.boolean "done", default: false
     t.bigint "checklist_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_133902) do
     t.string "title"
     t.text "description"
     t.bigint "list_id", null: false
-    t.boolean "done"
+    t.boolean "done", default: false
     t.date "start_at"
     t.date "end_at"
     t.datetime "created_at", precision: 6, null: false
