@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'simple_form'
 # Needed for authentication
 gem 'devise'
+# Needed for seed
+gem 'faker', '~> 2.17'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
