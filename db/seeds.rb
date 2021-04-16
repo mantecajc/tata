@@ -56,6 +56,12 @@ puts '3. Creating database...'
                             done: [true, false].sample,
                             checklist_id: checklist.id)
     end
+    puts "#{checklist.checklist_tasks.where(done: true).count}"
+    puts "#{checklist.checklist_tasks.count}"
+    puts "#{checklist.checklist_tasks.where(done: true).count.to_f / checklist.checklist_tasks.count.to_f}"
+    checklist.completed_rate = checklist.checklist_tasks.where(done: true).count / checklist.checklist_tasks.count.to_f
+    puts checklist.completed_rate
+    checklist.save!
   end
 end
 
