@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_233954) do
+ActiveRecord::Schema.define(version: 2021_04_12_140929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,21 @@ ActiveRecord::Schema.define(version: 2021_04_10_233954) do
     t.index ["table_id"], name: "index_lists_on_table_id"
   end
 
+  create_table "shares", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "table_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["table_id"], name: "index_shares_on_table_id"
+    t.index ["user_id"], name: "index_shares_on_user_id"
+  end
+
   create_table "tables", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_tables_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -76,5 +87,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_233954) do
   add_foreign_key "checklist_tasks", "checklists"
   add_foreign_key "checklists", "lists"
   add_foreign_key "lists", "tables"
+  add_foreign_key "shares", "tables"
+  add_foreign_key "shares", "users"
+  add_foreign_key "tables", "users"
   add_foreign_key "tasks", "lists"
 end
