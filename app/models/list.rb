@@ -4,6 +4,6 @@ class List < ApplicationRecord
   has_many :checklists, dependent: :destroy
 
   validates :title, presence: true,
-                    length: { minimum: 5,
+                    length: { minimum: 2,
                               maximum: 20 }
 end
