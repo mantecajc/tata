@@ -8,47 +8,40 @@
 require 'faker'
 
 puts '1. Cleaning database...'
-
 Task.delete_all
 ChecklistTask.delete_all
 Checklist.delete_all
 List.delete_all
 Table.delete_all
 User.delete_all
+puts '----------------- Done! -----------------'
 
-puts 'Done!'
-puts '-----------------'
 puts '2. Creating users...'
-
 User.create!(username: 'javier',
-            first_name: 'Javier',
-            last_name: 'Cuadrado',
-            email: 'javier@tata.com',
-            password: 'javier@tata.com')
-
+             first_name: 'Javier',
+             email: 'javier@tata.com',
+             password: 'javier@tata.com')
 User.create!(username: 'annelaure',
-            first_name: 'Anne-Laure',
-            last_name: 'Tulet',
-            email: 'annelaure@tata.com',
-            password: 'annelaure@tata.com')
+             first_name: 'Anne-Laure',
+             last_name: 'Tulet',
+             email: 'annelaure@tata.com',
+             password: 'annelaure@tata.com')
+puts '----------------- Done! -----------------'
 
-puts 'Done!'
-puts '-----------------'
 puts '3. Creating database...'
-
 4.times do
   table = Table.create!(title: Faker::DcComics.hero,
-                user_id: User.first.id)
+                        user_id: User.first.id)
   4.times do
     list = List.create!(title: Faker::Job.field,
                         table_id: table.id)
     5.times do
-      task = Task.create!(title: Faker::Lorem.sentence,
-                          description: Faker::Lorem.paragraphs,
-                          list_id: list.id,
-                          done: [true, false].sample,
-                          start_at: Date.today,
-                          end_at: (Date.today...(Date.today + 300)).to_a.sample)
+      Task.create!(title: Faker::Lorem.sentence,
+                   description: Faker::Lorem.paragraphs,
+                   list_id: list.id,
+                   done: [true, false].sample,
+                   start_at: Date.today,
+                   end_at: (Date.today...(Date.today + 300)).to_a.sample)
     end
     checklist = Checklist.create!(list_id: list.id)
     4.times do
@@ -56,15 +49,12 @@ puts '3. Creating database...'
                             done: [true, false].sample,
                             checklist_id: checklist.id)
     end
-    puts "#{checklist.checklist_tasks.where(done: true).count}"
-    puts "#{checklist.checklist_tasks.count}"
-    puts "#{checklist.checklist_tasks.where(done: true).count.to_f / checklist.checklist_tasks.count.to_f}"
-    checklist.completed_rate = checklist.checklist_tasks.where(done: true).count / checklist.checklist_tasks.count.to_f
-    puts checklist.completed_rate
+    a = checklist.checklist_tasks.where(done: true).count.to_f
+    b = checklist.checklist_tasks.count.to_f
+    checklist.completed_rate = a / b
     checklist.save!
   end
 end
+puts '----------------- Done! -----------------'
 
-puts 'Done!'
-puts '-----------------'
 puts 'Finished!'

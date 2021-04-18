@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_140929) do
+ActiveRecord::Schema.define(version: 2021_04_18_135827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_140929) do
   end
 
   create_table "checklists", force: :cascade do |t|
-    t.integer "completed_rate", default: 0
+    t.float "completed_rate", default: 0.0
     t.bigint "list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
